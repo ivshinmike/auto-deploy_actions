@@ -33,12 +33,14 @@ docker run --rm -p 8000:8000 time-server-api:latest
 
 - `GET /` — приветствие
 - `GET /time` — текущее время сервера (локальное) + UTC + timestamp + timezone
+- `GET /datetime` — текущие дата и время сервера
 - `GET /health` — healthcheck
 
 Примеры:
 
 ```powershell
 curl http://127.0.0.1:8000/time
+curl http://127.0.0.1:8000/datetime
 curl http://127.0.0.1:8000/health
 ```
 

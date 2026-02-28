@@ -34,6 +34,18 @@ async def get_current_time():
     }
 
 
+@app.get("/datetime")
+async def get_current_datetime():
+    now = datetime.now().astimezone()
+    return {
+        "datetime": now.isoformat(),
+        "formatted": now.strftime("%Y-%m-%d %H:%M:%S"),
+        "date": now.date().isoformat(),
+        "time": now.time().replace(microsecond=0).isoformat(),
+        "timezone": str(now.tzinfo),
+    }
+
+
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.now(timezone.utc).isoformat()}

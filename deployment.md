@@ -37,8 +37,8 @@ Workflow находится по пути: `.github/workflows/deploy.yml`.
 - `SSH_PORT` — порт SSH (обычно `22`);
 - `SSH_USERNAME` — пользователь на сервере, под которым выполняются Docker-команды;
 - `SSH_PRIVATE_KEY` — приватный SSH-ключ в текстовом виде (как в `~/.ssh/id_rsa`, без парольной фразы или с заранее настроенным `ssh-agent`);
-- `GHCR_USERNAME` — логин пользователя/бота, который имеет доступ к GHCR;
-- `GHCR_TOKEN` — персональный токен доступа (PAT) с правами хотя бы `read:packages` (и `write:packages`, если через него тоже пушить образы).
+
+Дополнительные `GHCR_USERNAME` и `GHCR_TOKEN` не требуются: в workflow используется встроенный `GITHUB_TOKEN` и `github.actor`.
 
 ## Что происходит на сервере
 
@@ -49,6 +49,10 @@ Workflow находится по пути: `.github/workflows/deploy.yml`.
    ```bash
    echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
    ```
+
+   Где:
+   - `GHCR_USERNAME` = `github.actor`;
+   - `GHCR_TOKEN` = встроенный `secrets.GITHUB_TOKEN`.
 
 2. Загрузка свежего образа:
 

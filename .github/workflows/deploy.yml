@@ -48,8 +48,8 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         env:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
-          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }} # Имя пользователя/бота для доступа к GHCR
-          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}       # PAT или токен с правами на чтение образов
+          GHCR_USERNAME: ${{ github.actor }}       # Берём логин текущего GitHub-пользователя
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Используем встроенный токен GitHub Actions
         with:
           host: ${{ secrets.SSH_HOST }}         # Хост удалённого сервера
           username: ${{ secrets.SSH_USERNAME }} # Пользователь на сервере
